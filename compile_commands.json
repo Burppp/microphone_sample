@@ -1,0 +1,7 @@
+[
+  {
+    "directory": "D:/GitHub/microphone_sample",
+    "command": "D:/mingw64/bin/gcc.exe -IBSP/dfsdm/inc -ICore/Inc -IUSB_Device/App -IUSB_Device/Target -IMiddlewares/ST/STM32_USB_Device_Library/Core/Inc -IMiddlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -IDrivers/CMSIS/Include -IDrivers/CMSIS/Device/ST/STM32H7xx/Include -IDrivers/STM32H7xx_HAL_Driver/Inc -IDrivers/STM32H7xx_HAL_Driver/Inc/Legacy -ID:/keil5/ARM/CMSIS-DSP/1.14.2/Include -DSTM32H731xx -DUSE_HAL_DRIVER -D__GNUC__ -D__ARM_ARCH_7EM__=1 -D__ARM_ARCH_7M__=1 -D__STATIC_INLINE=static inline -D__attribute__=__attribute__ -D__attribute__((section(x)))=__attribute__((section(x))) -D__attribute__((packed))=__attribute__((packed)) -D__attribute__((noreturn))=__attribute__((noreturn)) -std=c11 -fms-extensions -c Core/Src/main.c -o Core/Src/main.o",
+    "file": "Core/Src/main.c"
+  }
+] 

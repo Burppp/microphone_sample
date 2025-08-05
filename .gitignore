@@ -1,3 +1,8 @@
+*.idx
+*.icf
+*.txt
+*.crf
+
 # Prerequisites
 *.d
 

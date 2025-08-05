@@ -1,0 +1,28 @@
+{
+  "configurations": [
+    {
+      "name": "C",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/Core/Inc",
+        "${workspaceFolder}/BSP/dfsdm/inc",
+        "${workspaceFolder}/Drivers/CMSIS/Include",
+        "${workspaceFolder}/Drivers/STM32H7xx_HAL_Driver/Inc",
+        "${workspaceFolder}/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy",
+        "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32H7xx/Include",
+        "D:/mingw64/include",
+        "D:/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include",
+        "D:/mingw64/x86_64-w64-mingw32/include"
+      ],
+      "defines": [
+        "STM32H731xx",
+        "USE_HAL_DRIVER"
+      ],
+      "compilerPath": "D:/mingw64/bin/gcc.exe",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "gcc-x64"
+    }
+  ],
+  "version": 4
+} 

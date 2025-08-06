@@ -188,8 +188,8 @@ def main():
 if __name__ == "__main__":
     # 如果没有命令行参数，使用默认参数处理sample_16_39.csv
     if len(sys.argv) == 1:
-        csv_file = "sample_19_58.csv"
-        pcm_file = "audio.pcm"
+        csv_file = "sample_10_59.csv"
+        pcm_file = "IVS_audio.pcm"
         
         if os.path.exists(csv_file):
             success = csv_to_pcm(

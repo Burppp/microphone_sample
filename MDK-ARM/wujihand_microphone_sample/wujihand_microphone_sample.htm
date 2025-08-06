@@ -3,7 +3,7 @@
 <title>Static Call Graph - [wujihand_microphone_sample\wujihand_microphone_sample.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image wujihand_microphone_sample\wujihand_microphone_sample.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Tue Aug  5 19:55:22 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Wed Aug  6 10:55:37 2025
 <BR><P>
 <H3>Maximum Stack Usage =        376 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -49,9 +49,9 @@ Function Pointers
  <LI><a href="#[74]">DFSDM1_FLT1_IRQHandler</a> from startup_stm32h750xx.o(.text) referenced from startup_stm32h750xx.o(RESET)
  <LI><a href="#[75]">DFSDM1_FLT2_IRQHandler</a> from startup_stm32h750xx.o(.text) referenced from startup_stm32h750xx.o(RESET)
  <LI><a href="#[76]">DFSDM1_FLT3_IRQHandler</a> from startup_stm32h750xx.o(.text) referenced from startup_stm32h750xx.o(RESET)
- <LI><a href="#[99]">DFSDM_DMAError</a> from stm32h7xx_hal_dfsdm.o(.text.DFSDM_DMAError) referenced 2 times from stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularStart_DMA)
- <LI><a href="#[9a]">DFSDM_DMARegularConvCplt</a> from stm32h7xx_hal_dfsdm.o(.text.DFSDM_DMARegularConvCplt) referenced 2 times from stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularStart_DMA)
- <LI><a href="#[9b]">DFSDM_DMARegularHalfConvCplt</a> from stm32h7xx_hal_dfsdm.o(.text.DFSDM_DMARegularHalfConvCplt) referenced 2 times from stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularStart_DMA)
+ <LI><a href="#[99]">DFSDM_DMAError</a> from stm32h7xx_hal_dfsdm.o(.text.DFSDM_DMAError) referenced 2 times from stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularMsbStart_DMA)
+ <LI><a href="#[9a]">DFSDM_DMARegularConvCplt</a> from stm32h7xx_hal_dfsdm.o(.text.DFSDM_DMARegularConvCplt) referenced 2 times from stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularMsbStart_DMA)
+ <LI><a href="#[9b]">DFSDM_DMARegularHalfConvCplt</a> from stm32h7xx_hal_dfsdm.o(.text.DFSDM_DMARegularHalfConvCplt) referenced 2 times from stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularMsbStart_DMA)
  <LI><a href="#[15]">DMA1_Stream0_IRQHandler</a> from stm32h7xx_it.o(.text.DMA1_Stream0_IRQHandler) referenced from startup_stm32h750xx.o(RESET)
  <LI><a href="#[16]">DMA1_Stream1_IRQHandler</a> from stm32h7xx_it.o(.text.DMA1_Stream1_IRQHandler) referenced from startup_stm32h750xx.o(RESET)
  <LI><a href="#[17]">DMA1_Stream2_IRQHandler</a> from stm32h7xx_it.o(.text.DMA1_Stream2_IRQHandler) referenced from startup_stm32h750xx.o(RESET)
@@ -920,7 +920,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_DFSDM1_Init
 </UL>
 
-<P><STRONG><a name="[c2]"></a>HAL_DFSDM_FilterMspInit</STRONG> (Thumb, 386 bytes, Stack size 248 bytes, dfsdm.o(.text.HAL_DFSDM_FilterMspInit))
+<P><STRONG><a name="[c2]"></a>HAL_DFSDM_FilterMspInit</STRONG> (Thumb, 394 bytes, Stack size 248 bytes, dfsdm.o(.text.HAL_DFSDM_FilterMspInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 304 + Unknown Stack Size
 <LI>Call Chain = HAL_DFSDM_FilterMspInit &rArr; HAL_RCCEx_PeriphCLKConfig &rArr; RCCEx_PLL3_Config
 </UL>
@@ -933,7 +933,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DFSDM_FilterInit
 </UL>
 
-<P><STRONG><a name="[b5]"></a>HAL_DFSDM_FilterRegConvCpltCallback</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, bsp_dfsdm.o(.text.HAL_DFSDM_FilterRegConvCpltCallback))
+<P><STRONG><a name="[b5]"></a>HAL_DFSDM_FilterRegConvCpltCallback</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, bsp_dfsdm.o(.text.HAL_DFSDM_FilterRegConvCpltCallback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = HAL_DFSDM_FilterRegConvCpltCallback &rArr; HAL_UART_Transmit_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_DMA
@@ -941,7 +941,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DFSDM_DMARegularConvCplt
 </UL>
 
-<P><STRONG><a name="[b6]"></a>HAL_DFSDM_FilterRegConvHalfCpltCallback</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, bsp_dfsdm.o(.text.HAL_DFSDM_FilterRegConvHalfCpltCallback))
+<P><STRONG><a name="[b6]"></a>HAL_DFSDM_FilterRegConvHalfCpltCallback</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, bsp_dfsdm.o(.text.HAL_DFSDM_FilterRegConvHalfCpltCallback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = HAL_DFSDM_FilterRegConvHalfCpltCallback &rArr; HAL_UART_Transmit_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_DMA
@@ -949,8 +949,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DFSDM_DMARegularHalfConvCplt
 </UL>
 
-<P><STRONG><a name="[c5]"></a>HAL_DFSDM_FilterRegularStart_DMA</STRONG> (Thumb, 244 bytes, Stack size 16 bytes, stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularStart_DMA))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = HAL_DFSDM_FilterRegularStart_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
+<P><STRONG><a name="[c5]"></a>HAL_DFSDM_FilterRegularMsbStart_DMA</STRONG> (Thumb, 244 bytes, Stack size 16 bytes, stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularMsbStart_DMA))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = HAL_DFSDM_FilterRegularMsbStart_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DMA_Start_IT
 </UL>
@@ -994,7 +994,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_SetConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DFSDM_FilterRegularStart_DMA
+<BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DFSDM_FilterRegularMsbStart_DMA
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_DMA
 </UL>
 
@@ -1431,12 +1431,12 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h750xx.o(RESET)
 </UL>
-<P><STRONG><a name="[ab]"></a>main</STRONG> (Thumb, 134 bytes, Stack size 16 bytes, main.o(.text.main))
+<P><STRONG><a name="[ab]"></a>main</STRONG> (Thumb, 166 bytes, Stack size 16 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 376 + Unknown Stack Size
 <LI>Call Chain = main &rArr; MX_DFSDM1_Init &rArr; HAL_DFSDM_ChannelInit &rArr; HAL_DFSDM_ChannelMspInit &rArr; HAL_RCCEx_PeriphCLKConfig &rArr; RCCEx_PLL3_Config
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DFSDM_FilterRegularStart_DMA
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DFSDM_FilterRegularMsbStart_DMA
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
 <LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_DFSDM1_Init
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_CRC_Init
@@ -1491,21 +1491,21 @@ Local Symbols
 <P><STRONG><a name="[99]"></a>DFSDM_DMAError</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32h7xx_hal_dfsdm.o(.text.DFSDM_DMAError))
 <BR><BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DFSDM_FilterErrorCallback
 </UL>
-<BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularStart_DMA)
+<BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularMsbStart_DMA)
 </UL>
 <P><STRONG><a name="[9a]"></a>DFSDM_DMARegularConvCplt</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32h7xx_hal_dfsdm.o(.text.DFSDM_DMARegularConvCplt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = DFSDM_DMARegularConvCplt &rArr; HAL_DFSDM_FilterRegConvCpltCallback &rArr; HAL_UART_Transmit_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DFSDM_FilterRegConvCpltCallback
 </UL>
-<BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularStart_DMA)
+<BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularMsbStart_DMA)
 </UL>
 <P><STRONG><a name="[9b]"></a>DFSDM_DMARegularHalfConvCplt</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32h7xx_hal_dfsdm.o(.text.DFSDM_DMARegularHalfConvCplt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = DFSDM_DMARegularHalfConvCplt &rArr; HAL_DFSDM_FilterRegConvHalfCpltCallback &rArr; HAL_UART_Transmit_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DFSDM_FilterRegConvHalfCpltCallback
 </UL>
-<BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularStart_DMA)
+<BR>[Address Reference Count : 1]<UL><LI> stm32h7xx_hal_dfsdm.o(.text.HAL_DFSDM_FilterRegularMsbStart_DMA)
 </UL>
 <P><STRONG><a name="[9d]"></a>UART_DMAError</STRONG> (Thumb, 200 bytes, Stack size 0 bytes, stm32h7xx_hal_uart.o(.text.UART_DMAError))
 <BR><BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_ErrorCallback

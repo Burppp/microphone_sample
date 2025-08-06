@@ -5,6 +5,8 @@
 #include "stdint.h"
 #include "usart.h"
 
+#include "dfsdm.h"
+
 #define SAMPLE_FREQUENCY            8000
 #define BYTE_PER_SAMPLE             2
 #define MICROPHEN_NUMBER            1

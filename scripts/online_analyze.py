@@ -181,9 +181,9 @@ class SerialMonitor(QMainWindow):
         # 波特率选择
         serial_layout.addWidget(QLabel("波特率:"), 1, 0)
         self.baudrate_combo = QComboBox()
-        baudrates = ['9600', '19200', '38400', '57600', '115200', '230400', '460800', '921600']
+        baudrates = ['9600', '19200', '38400', '57600', '115200', '230400', '256000', '460800', '921600']
         self.baudrate_combo.addItems(baudrates)
-        self.baudrate_combo.setCurrentText('115200')
+        self.baudrate_combo.setCurrentText('256000')
         serial_layout.addWidget(self.baudrate_combo, 1, 1)
         
         # 数据格式选择

@@ -2,7 +2,8 @@
 
 extern UART_HandleTypeDef huart1;
 
-int16_t dfsdm_buf[BUF_LENGTH] = {0x12};
+int16_t dfsdm_buf[BUF_LENGTH] = {0x00};
+uint16_t buf[BUF_LENGTH] = {0x00};
 
 void HAL_DFSDM_FilterRegConvHalfCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter)
 {
@@ -11,5 +12,5 @@ void HAL_DFSDM_FilterRegConvHalfCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_
 
 void HAL_DFSDM_FilterRegConvCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter)
 {
-  HAL_UART_Transmit_DMA(&huart1, (uint8_t *)(dfsdm_buf + BUF_LENGTH / 2), BUF_LENGTH);
+    HAL_UART_Transmit_DMA(&huart1, (uint8_t *)(dfsdm_buf + BUF_LENGTH / 2), BUF_LENGTH);
 }

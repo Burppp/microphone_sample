@@ -54,7 +54,7 @@ def analyze_csv_data(csv_file_path):
         print(f"估算采样率: {avg_sample_rate:.2f} Hz")
         sample_rate = avg_sample_rate
     else:
-        sample_rate = 8000  # 默认采样率
+        sample_rate = 12000  # 默认采样率
         print(f"使用默认采样率: {sample_rate} Hz")
     
     # 计算频谱图
@@ -68,6 +68,22 @@ def analyze_csv_data(csv_file_path):
         print(f"  频率范围: {f.min():.1f} - {f.max():.1f} Hz")
         print(f"  时间范围: {t.min():.3f} - {t.max():.3f} 秒")
         print(f"  频谱图尺寸: {Sxx.shape}")
+        
+        # 计算有效的频率范围（基于功率谱密度）
+        Sxx_db = 10 * np.log10(Sxx + 1e-10)
+        # 找到有意义的频率范围（功率谱密度大于最大值的1%）
+        max_power = np.max(Sxx_db)
+        threshold = max_power - 40  # 40dB动态范围
+        significant_freq_mask = np.any(Sxx_db > threshold, axis=1)
+        
+        if np.any(significant_freq_mask):
+            min_significant_freq = f[significant_freq_mask].min()
+            max_significant_freq = f[significant_freq_mask].max()
+            print(f"  有效频率范围: {min_significant_freq:.1f} - {max_significant_freq:.1f} Hz")
+        else:
+            min_significant_freq = f.min()
+            max_significant_freq = f.max()
+            print(f"  使用全频率范围: {min_significant_freq:.1f} - {max_significant_freq:.1f} Hz")
         
     except Exception as e:
         print(f"计算频谱图时出错: {e}")
@@ -93,7 +109,27 @@ def analyze_csv_data(csv_file_path):
     ax2.set_title('频谱图')
     ax2.set_xlabel('时间 (秒)')
     ax2.set_ylabel('频率 (Hz)')
-    ax2.set_ylim(0, min(4000, f.max()))
+    
+    # 智能设置纵轴范围
+    if 'max_significant_freq' in locals():
+        # 使用计算出的有效频率范围
+        if max_significant_freq > min_significant_freq:
+            # 添加一些边距，确保显示完整
+            margin = (max_significant_freq - min_significant_freq) * 0.1
+            y_min = max(0, min_significant_freq - margin)
+            y_max = min(20000, max_significant_freq + margin)
+            ax2.set_ylim(y_min, y_max)
+        else:
+            # 如果有效范围很小，使用默认范围
+            ax2.set_ylim(0, min(20000, f.max()))
+    else:
+        # 如果没有计算有效范围，使用传统方法
+        if f.max() > 0:
+            max_freq = min(20000, f.max())
+            ax2.set_ylim(0, max_freq)
+        else:
+            ax2.set_ylim(0, 1000)  # 默认范围
+    
     plt.colorbar(im, ax=ax2, label='功率谱密度 (dB/Hz)')
     
     # 3. 功率谱密度
@@ -150,7 +186,7 @@ if __name__ == "__main__":
     plt.rcParams['axes.unicode_minus'] = False
     
     # 分析CSV文件
-    csv_file = "test_audio_20250804_200927.csv"
+    csv_file = "sample_19_58.csv"
     
     if os.path.exists(csv_file):
         analyze_csv_data(csv_file)

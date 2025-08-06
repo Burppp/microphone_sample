@@ -3,7 +3,7 @@
 """
 串口数据接收和频率分析脚本
 功能：
-1. 接收串口数据（int16格式）
+1. 接收串口数据（uint16格式）
 2. 实时频率分析
 3. 保存为CSV文件
 4. 生成频谱图
@@ -28,7 +28,7 @@ from tkinter import ttk, messagebox
 class SerialDataReceiver:
     """串口数据接收器"""
     
-    def __init__(self, port, baudrate=115200, data_format='int16_t', byteorder='little'):
+    def __init__(self, port, baudrate=115200, data_format='uint16_t', byteorder='little'):
         self.port = port
         self.baudrate = baudrate
         self.data_format = data_format
@@ -78,22 +78,22 @@ class SerialDataReceiver:
         while self.running:
             try:
                 if self.serial and self.serial.in_waiting:
-                    if self.data_format == 'int16_t':
-                        # int16_t模式：每两个字节解析为一个int16_t
+                    if self.data_format == 'uint16_t':
+                        # uint16_t模式：每两个字节解析为一个uint16_t
                         if self.serial.in_waiting >= 2:
                             # 读取两个字节
                             byte1 = self.serial.read(1)
                             byte2 = self.serial.read(1)
                             
                             if len(byte1) == 1 and len(byte2) == 1:
-                                # 组合为16位整数
-                                int16_value = int.from_bytes(byte1 + byte2, 
-                                                           byteorder=self.byteorder, 
-                                                           signed=True)
+                                # 组合为16位无符号整数
+                                uint16_value = int.from_bytes(byte1 + byte2, 
+                                                            byteorder=self.byteorder, 
+                                                            signed=False)
                                 
                                 # 记录时间戳和数据
                                 timestamp = time.time()
-                                self.data_buffer.append(int16_value)
+                                self.data_buffer.append(uint16_value)
                                 self.timestamps.append(timestamp)
                                 self.total_samples += 1
                                 
@@ -259,7 +259,7 @@ class FrequencyAnalyzerGUI:
         ttk.Label(control_frame, text="波特率:").pack(anchor=tk.W)
         self.baudrate_var = tk.StringVar(value="115200")
         baudrate_combo = ttk.Combobox(control_frame, textvariable=self.baudrate_var, 
-                                     values=["9600", "19200", "38400", "57600", "115200", "230400", "460800", "921600"])
+                                     values=["9600", "19200", "38400", "57600", "115200", "230400", "256000", "460800", "921600"])
         baudrate_combo.pack(fill=tk.X, pady=(0, 10))
         
         # 连接按钮

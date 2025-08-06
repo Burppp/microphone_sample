@@ -6,6 +6,8 @@
         "${workspaceFolder}/**",
         "${workspaceFolder}/Core/Inc",
         "${workspaceFolder}/BSP/dfsdm/inc",
+        "${workspaceFolder}/BSP/lpf/inc",
+        "${workspaceFolder}/PDM2PCM/App",
         "${workspaceFolder}/Drivers/CMSIS/Include",
         "${workspaceFolder}/Drivers/STM32H7xx_HAL_Driver/Inc",
         "${workspaceFolder}/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy",

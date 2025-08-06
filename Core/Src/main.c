@@ -19,20 +19,23 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "crc.h"
-#include "dfsdm.h"
 #include "dma.h"
+#include "i2s.h"
+#include "pdm2pcm.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "bsp_dfsdm.h"
+#include "string.h"
+#include "stdint.h"
+#include "math.h"
+#include "bsp_lpf.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-extern int16_t Buf_Mic0[BUF_LENGTH];
-extern int16_t Buf_Mic1[BUF_LENGTH];
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -48,7 +51,7 @@ extern int16_t Buf_Mic1[BUF_LENGTH];
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+int komijbox_sound_dB ( const int16_t *pcm, int len );
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -60,7 +63,11 @@ static void MPU_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int32_t g_pdm_buf[128];
+int16_t g_pcm_buf[128];
+int16_t g_filtered_pcm_buf[128];
+int dB = 0;
+extern PDM_Filter_Handler_t PDM1_filter_handler;
 /* USER CODE END 0 */
 
 /**
@@ -97,21 +104,12 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_CRC_Init();
-  MX_DFSDM1_Init();
   MX_USART1_UART_Init();
+  MX_I2S1_Init();
+  MX_PDM2PCM_Init();
   /* USER CODE BEGIN 2 */
-    __HAL_UART_GET_FLAG(&huart1, UART_FLAG_TC);
-
-    if(HAL_DFSDM_FilterRegularMsbStart_DMA(&hdfsdm1_filter0, Buf_Mic0, BUF_LENGTH) != HAL_OK)
-    {
-        Error_Handler();
-    }
-	if(HAL_DFSDM_FilterRegularMsbStart_DMA(&hdfsdm1_filter1, Buf_Mic1, BUF_LENGTH) != HAL_OK)
-    {
-        Error_Handler();
-    }
-
-    HAL_Delay(5000);
+	HAL_I2S_Receive_DMA(&hi2s1, (uint16_t *)g_pdm_buf, 128);
+    init_lowpass_filter();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -121,6 +119,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    PDM_Filter(g_pdm_buf, g_pcm_buf, &PDM1_filter_handler);
+    filter_block(g_pcm_buf, g_filtered_pcm_buf, 128);
+    dB = komijbox_sound_dB(g_filtered_pcm_buf, 128);
+    HAL_UART_Transmit_DMA(&huart1, (uint8_t *)g_filtered_pcm_buf, 40);
+    HAL_Delay(1);
   }
   /* USER CODE END 3 */
 }
@@ -185,7 +188,40 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+/**
+ * @brief 
+ *
+ * @param pcm :
+ * @param len : 
+ * @return int : 
+ * @note   Lp = 
+ *
+ */
+int komijbox_sound_dB (const int16_t *pcm, int len)
+{
+	int sum = 0;
+	int dB = 0;
+	short tmp = 0;
+	short *pcmaddr = (short *)pcm;
+ 
+	for (int i = 0; i < len; i++)
+	{
+        if(*pcmaddr == 0)
+            continue;
+		memcpy (&tmp, pcmaddr + i, 2);
+		short abs_tmp = tmp > 0 ? tmp : -tmp;
+		sum += abs_tmp;
+	}
+ 
+	sum = sum / (len);
+ 
+	if (sum)
+	{
+		dB = (int ) ( 20 * log10 ( sum ) );
+	}
+ 
+	return dB;
+}
 /* USER CODE END 4 */
 
  /* MPU Configuration */

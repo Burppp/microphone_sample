@@ -21,7 +21,41 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
+/**
+ * @brief Prints a character over the UART.
+ * 
+ * Steps:
+ *  1. Transmits the character over the UART.
+ *  
+ * @param[in] ch        : The character to be printed.
+ * @param[in] f    : Pointer to the file stream.
+ * 
+ * @return int : The character printed.
+ * 
+ * */
+int fputc(int ch, FILE *f)
+{
+  HAL_UART_Transmit(&huart1, (uint8_t *)&ch, 1, 0xffff);
+  return ch;
+}
 
+/**
+ * @brief Reads a character from the UART.
+ * 
+ * Steps:
+ *  1. Receives a character from the UART.
+ *  
+ * @param[in] f    : Pointer to the file stream.
+ * 
+ * @return int : The character read.
+ * 
+  */
+int fgetc(FILE *f)
+{
+  uint8_t ch = 0;
+  HAL_UART_Receive(&huart1, &ch, 1, 0xffff);
+  return ch;
+}
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -40,7 +74,7 @@ void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 256000;
+  huart1.Init.BaudRate = 921600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;

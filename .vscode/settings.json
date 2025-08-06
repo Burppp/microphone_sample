@@ -5,6 +5,8 @@
   "C_Cpp.default.includePath": [
     "${workspaceFolder}/Core/Inc",
     "${workspaceFolder}/BSP/dfsdm/inc",
+    "${workspaceFolder}/BSP/lpf/inc",
+    "${workspaceFolder}/PDM2PCM/App",
     "${workspaceFolder}/Drivers/CMSIS/Include",
     "${workspaceFolder}/Drivers/STM32H7xx_HAL_Driver/Inc",
     "${workspaceFolder}/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy",
@@ -18,7 +20,9 @@
   "C_Cpp.default.browse.path": [
     "${workspaceFolder}/Core/Inc",
     "${workspaceFolder}/Core/**",
-    "${workspaceFolder}/BSP/dfsdm/inc"
+    "${workspaceFolder}/BSP/dfsdm/inc",
+    "${workspaceFolder}/BSP/lpf/inc",
+    "${workspaceFolder}/PDM2PCM/App"
   ],
   "C_Cpp.default.defines": [
     "USE_HAL_DRIVER",
